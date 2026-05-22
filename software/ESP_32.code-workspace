@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../Visual Studio 2015/Projects/ESP_32"
+		},
+		{
+			"name": "Muliplicapion of gpio",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

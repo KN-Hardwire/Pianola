@@ -1,0 +1,110 @@
+{
+  "custom_cursors": 2,
+  "last_sch_text_sim_command": "",
+  "tabs": [
+    {
+      "analysis": "TRAN",
+      "commands": [
+        ".tran 1u 3m",
+        ".kicad adjustpaths",
+        ".save all",
+        ".probe allp"
+      ],
+      "dottedSecondary": true,
+      "margins": {
+        "bottom": 45,
+        "left": 70,
+        "right": 70,
+        "top": 30
+      },
+      "measurements": [
+        {
+          "expr": "MAX V(/QA)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/QB)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/QC)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/QD)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/QE)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/QF)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/RCK)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/SCK)",
+          "format": "3~V"
+        },
+        {
+          "expr": "MAX V(/SI)",
+          "format": "3~V"
+        }
+      ],
+      "showGrid": true,
+      "traces": [
+        {
+          "color": "rgb(228, 26, 28)",
+          "signal": "V(/QA)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(/QB)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(77, 175, 74)",
+          "signal": "V(/QC)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(152, 78, 163)",
+          "signal": "V(/QD)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 127, 0)",
+          "signal": "V(/QE)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 255, 51)",
+          "signal": "V(/QF)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(166, 86, 40)",
+          "signal": "V(/RCK)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(247, 129, 191)",
+          "signal": "V(/SCK)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(102, 194, 165)",
+          "signal": "V(/SI)",
+          "trace_type": 257
+        }
+      ]
+    }
+  ],
+  "user_defined_signals": [],
+  "version": 7
+}
