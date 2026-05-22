@@ -1,0 +1,56 @@
+* Definicje modeli
+.model przerzutnik_d d_dff(clk_delay=5n rise_delay=2n fall_delay=2n ic=0)
+.model inwerter d_inverter(rise_delay=0.5n fall_delay=0.3n input_load=0.5p)
+.model wejscie_cyfrowe adc_bridge(in_low=1.0 in_high=2.0)
+.model wyjscie_analogowe dac_bridge(out_low=0.0 out_high=3.3 t_rise=10n t_fall=10n)
+.model cyfrowy_pulldown d_pulldown(load=0.5p)
+
+* Poprawny model bramki trójstanowej XSPICE
+.model bramka_trojstanowa d_tristate(delay=0.5n input_load=0.5p enable_load=0.5p)
+
+.subckt 595 DS SCK RCK nSCLR G QA QB QC QD QE QF QG QH
+
+* 1. Konwersja 5 wejść sterujących do domeny cyfrowej
+a1 [DS SCK RCK nSCLR G] [d_data d_sck d_rck d_nsclr d_ng] wejscie_cyfrowe
+
+* 2. Stabilne cyfrowe zero dla wejść asynchronicznych
+a_pull_gnd d_zero cyfrowy_pulldown
+
+* 3. Logika odwrócona (nSCLR i G są aktywne zerem)
+a_inv1 d_nsclr sclr inwerter
+a_inv2 d_ng d_g_enable inwerter
+
+* --- WARSTWA 1: Rejestr przesuwny ---
+a_shift0 d_data d_sck d_zero sclr s0 null przerzutnik_d
+a_shift1 s0     d_sck d_zero sclr s1 null przerzutnik_d
+a_shift2 s1     d_sck d_zero sclr s2 null przerzutnik_d
+a_shift3 s2     d_sck d_zero sclr s3 null przerzutnik_d 
+a_shift4 s3     d_sck d_zero sclr s4 null przerzutnik_d
+a_shift5 s4     d_sck d_zero sclr s5 null przerzutnik_d
+a_shift6 s5     d_sck d_zero sclr s6 null przerzutnik_d
+a_shift7 s6     d_sck d_zero sclr s7 null przerzutnik_d
+
+* --- WARSTWA 2: Rejestr przechowujący (Zatrzask)
+a_latch0 s0 d_rck d_zero d_zero l_a null przerzutnik_d
+a_latch1 s1 d_rck d_zero d_zero l_b null przerzutnik_d
+a_latch2 s2 d_rck d_zero d_zero l_c null przerzutnik_d
+a_latch3 s3 d_rck d_zero d_zero l_d null przerzutnik_d
+a_latch4 s4 d_rck d_zero d_zero l_e null przerzutnik_d
+a_latch5 s5 d_rck d_zero d_zero l_f null przerzutnik_d
+a_latch6 s6 d_rck d_zero d_zero l_g null przerzutnik_d
+a_latch7 s7 d_rck d_zero d_zero l_h null przerzutnik_d
+
+* --- WARSTWA 3: Bramki trójstanowe (Kolejność: IN, ENABLE, OUT) ---
+a_bramka0 l_a d_g_enable out0 bramka_trojstanowa
+a_bramka1 l_b d_g_enable out1 bramka_trojstanowa
+a_bramka2 l_c d_g_enable out2 bramka_trojstanowa
+a_bramka3 l_d d_g_enable out3 bramka_trojstanowa
+a_bramka4 l_e d_g_enable out4 bramka_trojstanowa
+a_bramka5 l_f d_g_enable out5 bramka_trojstanowa
+a_bramka6 l_g d_g_enable out6 bramka_trojstanowa
+a_bramka7 l_h d_g_enable out7 bramka_trojstanowa
+
+* 4. Wyjścia analogowe (mostek DAC)
+a2 [out0 out1 out2 out3 out4 out5 out6 out7] [QA QB QC QD QE QF QG QH] wyjscie_analogowe
+
+.ends
