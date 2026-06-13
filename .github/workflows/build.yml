@@ -15,8 +15,13 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Configure CMake
-      run: cmake -B software/build -S software
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
 
-    - name: Build
-      run: cmake --build software/build
+    - name: Install PlatformIO
+      run: pip install -U platformio
+
+    - name: Build project
+      run: pio run -d software
