@@ -1,6 +1,7 @@
-# [Project Name]
+# The Phantom Piano Project
+The project focuses on developing an electronic player piano that communicates via the MIDI protocol. It is designed to support both dynamic expression (velocity tracking) and the sustain pedal. Our ultimate goal is to enable users to record their live performances and save them in MIDI format, allowing them to be accurately replayed on the instrument later. 
 
-[Short description of the project]
+Additionally, we aim to implement a silent system feature that allows seamless transition from acoustic mode to electronic mode. This mechanism functions by catching/stopping the hammer action before they strike the strings, muting the acoustic sound, and routing the audio digitally. By selecting any virtual instrument patch, this system not only expands the creative capabilities of the piano but also enables silent practice using headphones.
 
 ## Visuals
 
